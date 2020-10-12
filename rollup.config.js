@@ -13,7 +13,7 @@ const config = {
   ],
   output: {
     format: 'umd',
-    name: 'faiyt-ui-components',
+    name: 'index',
     globals: {
       react: "React"
     }

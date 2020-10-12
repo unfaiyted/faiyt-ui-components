@@ -1,7 +1,7 @@
 import React from "react"
 
 const CheckBox = () => {
-  return <div>CheckBox</div>
+  return <div><input type="checkbox" name={""}/>CheckBox xxxes</div>
 }
 
 
