@@ -33,5 +33,5 @@ export default create({
 
   brandTitle: 'Faiyt.dev Component Library',
   brandUrl: 'https://faiyt.dev',
-  brandImage: 'https://placehold.it/350x150',
+  brandImage: 'https://faiyt.dev/logo.svg',
 });

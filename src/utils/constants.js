@@ -1,3 +1,3 @@
 
 
-export const PREFIX = "faiyt"
+export const PREFIX = "default"

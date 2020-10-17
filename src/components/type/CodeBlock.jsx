@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import merge from "lodash.merge";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import Header from "../layout/Header";
 
 const pre = darcula["pre[class*=\"language-\"]"];
 

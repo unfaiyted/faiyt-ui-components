@@ -2,16 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/button.scss';
 import {PREFIX} from "../../utils/constants";
-
+import {useTheme} from "../utilities/hooks/ThemeHook.js"
 /**
  * Primary UI component for user interaction.
  */
-export const Button = ({ primary, backgroundColor, size, label, classPrefix = PREFIX ,...props }) => {
-  const mode = primary ? `${classPrefix}-button--primary` :  `${classPrefix}-button--secondary`;
+export const Button = ({ primary, backgroundColor, size, label, theme ,...props }) => {
+
+  const {themePrefix} = useTheme(theme);
+
+  const mode = primary ? `${themePrefix}-button--primary` :  `${themePrefix}-button--secondary`;
+
   return (
     <button
       type="button"
-      className={[ `${classPrefix}-button`,  `${classPrefix}-button--${size}`, mode].join(' ')}
+      className={[ `${themePrefix}-button`,  `${themePrefix}-button--${size}`, mode].join(' ')}
       style={backgroundColor && { backgroundColor }}
       {...props}
     >
@@ -39,9 +43,19 @@ Button.propTypes = {
    */
   label: PropTypes.string.isRequired,
   /**
-   * Optional custom style prefix for themeing
+   * Optional custom style object to apply overrides
    */
-  classPrefix: PropTypes.string,
+  theme: PropTypes.shape({
+    /**
+     * This is the global theme designation
+     */
+    theme: PropTypes.string,
+    /**
+     * These are styles applied directly to the
+     * object.
+     */
+    styles: PropTypes.object
+  }),
   /**
    * Optional click handler
    */
