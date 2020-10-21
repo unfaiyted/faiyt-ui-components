@@ -23,7 +23,7 @@ export const ThemeProvider = ({children, settings}) => {
     </ThemeContext.Provider>
   );
 
-}
+};
 
 export const ThemeConsumer = ThemeContext.Consumer;
 export default ThemeContext;

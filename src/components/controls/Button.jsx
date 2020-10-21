@@ -66,7 +66,7 @@ Button.defaultProps = {
   backgroundColor: null,
   primary: false,
   size: 'medium',
-  classPrefix: undefined,
+  theme: {},
   onClick: undefined,
 };
 
