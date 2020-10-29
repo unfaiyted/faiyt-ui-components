@@ -1,21 +1,22 @@
 import useTheme from "../utilities/hooks/ThemeHook";
 import PropTypes from "prop-types";
-import Input from "./Input";
 
-export const RadioButton = ({label, type, className, disabled, name, aria, onClick, ...props}) => {
+export const Input = ({label, type, className, disabled, placeholder, name, aria, onClick, ...props}) => {
     const {themePrefix} = useTheme(props);
 
     return (
-        <Input
-            type="radio"
-            label={label}
-            name={name}
-            className{className}
-            disabled={disabled}
-            onClick={onClick}
-            aria={aria}
-
-            />
+        <div className={`${themePrefix}-input--container`}>
+            <label htmlFor={name}>{label}</label>
+            <input type={type}
+                   name={name}
+                   disabled={disabled}
+                   id={name}
+                   className={[`${themePrefix}-input`, `${themePrefix}-input--${type}`,className].join(" ")}
+                   placeholder={placeholder}
+                   aria-label={aria?.label || label}
+                   onClick={onClick}
+                   aria-describedby={aria?.describedBy}/>
+        </div>
     )
 }
 
