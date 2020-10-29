@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import merge from "lodash.merge";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -12,9 +11,9 @@ const styles = {
   ...darcula,
   "pre[class*=\"language-\"]": {
     ...pre,
-    "border-radius": "5px",
+    "borderRadius": "5px",
     "background": "#161a1d",
-    "margin-bottom": "40px"
+    "marginBottom": "40px"
   }
 }
 

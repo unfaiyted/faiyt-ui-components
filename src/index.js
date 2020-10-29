@@ -5,6 +5,8 @@ import Button from "./components/controls/Button.jsx"
 import Anchor from "./components/controls/Anchor.jsx"
 import Header from "./components/layout/Header.jsx";
 import CodeBlock from "./components/type/CodeBlock.jsx";
+import  ThemeContext, {ThemeProvider, ThemeConsumer} from "./components/utilities/ThemeContext.jsx";
+import {useTheme} from "./components/utilities/hooks/ThemeHook";
 
 const Components = {
     //Controls
@@ -16,8 +18,12 @@ const Components = {
     //Layout
       Header,
     //Type
-      CodeBlock
+      CodeBlock,
     //Utilities
+      ThemeProvider,
+      ThemeConsumer,
+      ThemeContext,
+      useTheme
 }
 
 

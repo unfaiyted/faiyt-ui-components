@@ -4,4 +4,7 @@ test/
 .babelrc
 rollup.config.js
 .idea
-.iml
+*.iml
+
+.eslintrc
+/.storybook
