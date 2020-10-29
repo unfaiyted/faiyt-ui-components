@@ -14,7 +14,7 @@ export const Anchor = ({ label, href, onClick, disabled,
   const {themePrefix, styles} = useTheme(theme);
 
   return (
-    <a href={href}    disabled
+    <a href={href}  disabled
       className={[`${themePrefix}-anchor`].join(' ')}
        style={styles}
       {...props}

@@ -13,6 +13,7 @@ export const useTheme = (props) => {
     return {
       themePrefix: props?.theme || state.theme,
       styles: props?.styles,
+      classNames: props?.classNames || "",
       state,
       changeTheme,
     }

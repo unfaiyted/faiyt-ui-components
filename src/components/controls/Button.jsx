@@ -6,7 +6,7 @@ import {useTheme} from "../utilities/hooks/ThemeHook.js"
 /**
  * Primary UI component for user interaction.
  */
-export const Button = ({ primary, backgroundColor, size, label, theme ,...props }) => {
+export const Button = ({ primary, backgroundColor, size, label, theme, className,...props }) => {
 
   const {themePrefix} = useTheme(theme);
 
@@ -15,7 +15,7 @@ export const Button = ({ primary, backgroundColor, size, label, theme ,...props 
   return (
     <button
       type="button"
-      className={[ `${themePrefix}-button`,  `${themePrefix}-button--${size}`, mode].join(' ')}
+      className={[ `${themePrefix}-button`,  `${themePrefix}-button--${size}`, mode, className].join(' ')}
       style={backgroundColor && { backgroundColor }}
       {...props}
     >

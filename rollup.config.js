@@ -23,6 +23,7 @@ const config = {
     name: 'index',
     globals: {
       react: "React"
+
     }
   }
 }

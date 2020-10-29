@@ -1,44 +1,108 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useTheme} from "../utilities/hooks/ThemeHook";
+import "../../styles/nav.scss";
 
 /**
  * Provides a box container for navigation style links
  */
-export const Nav = ({ direction, padding, theme, children, ...props}) =>
-{
+export const Nav = ({ direction, theme, items, ...props}) => {
 
-  const {themePrefix, styles} = useTheme(theme);
+  const {themePrefix, styles, classNames} = useTheme(theme);
 
   return (
-    <div
-       className={[`${themePrefix}-nav`].join(' ')}
+    <ul
+       className={[`${themePrefix}-nav`, `${themePrefix}-nav--${direction}`, classNames].join(' ')}
        style={styles}
        {...props}
     >
-      {children}
-    </div>)
+      {items.map((item) => {
+        return (<NavItem item={item}/>)
+      })}
+
+    </ul>)
+}
+
+/**
+ * Render a single item to the nav list
+ * @param item
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const NavItem = ({item}) => {
+  const [isShown, setIsShown] = useState(false);
+
+  const {themePrefix, classNames} = useTheme(item?.theme);
+
+  if(item?.items) {
+    return (
+      <li
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}
+        className={`${themePrefix}-nav-item ${classNames}`}
+      >
+        <a href={item?.href}> {item.label} </a>
+        <NavDropDown items={item.items} theme={item?.theme} isShown={isShown} />
+      </li>)
+  }
+
+  return (<li
+    className={`${themePrefix}-nav-item ${classNames}`}
+  ><a href={item?.href}> {item.label} </a></li>)
+};
+
+/**
+ * Renders the dropdown popup on hover of primary item
+ * @param items
+ * @param theme
+ * @param className
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const NavDropDown = ({items, isShown, theme}) => {
+
+  const {themePrefix, classNames} = useTheme(theme);
+
+  const displayed = (isShown) ? "shown" : "hidden"
+
+
+  return (
+   <div
+     className={[`${themePrefix}-nav-dropdown`, `${themePrefix}-nav-dropdown--${displayed}`, classNames].join(' ')}
+   >
+     {items.map((item) => {
+       return (<NavItem item={item} />)
+     })}
+
+   </div>
+ )
 }
 
 
 Nav.propTypes =  {
   /**
-   * Content to be rendered inside of the Anchor
+   * Passing theme object to override theme elements
    */
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  theme: PropTypes.object,
   /**
-   * Location to send when clicked
+   * Orientation of the navigation
    */
-  direction: PropTypes.string,
-  padding: PropTypes.string,
+  direction: PropTypes.oneOf(["horizontal","vertical"]),
+  /**
+   * Array of Object items that will be displayed
+   */
+  items: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    theme:  PropTypes.object,
+    href: PropTypes.string,
+  })),
+
 }
 
 Nav.defaultProps = {
-  label: null,
-  href: null,
-  disabled: false,
-  onClick: undefined,
-  themeOverrides: {}
+  direction: "horizontal",
+  theme: {},
+  items: []
 }
 
 export default Nav;
