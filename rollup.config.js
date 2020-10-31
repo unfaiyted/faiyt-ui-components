@@ -8,9 +8,10 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 // rollup.config.js
 const config = {
   input: 'src/index.js',
-  external: ['react', 'prop-types', 'react-syntax-highlighter'],
+  external: ['react', "react-dom" ,'prop-types', "react-syntax-highlighter"],
   plugins: [
     babel({
+      //presets: ["@babel/preset-react"],
       exclude: "node_modules/**"
     }),
     sourcemaps(),
@@ -26,9 +27,10 @@ const config = {
     format: 'umd',
     sourcemap: true,
     name: 'index',
+    exports: 'named',
     globals: {
-      react: "React"
-
+      react: "React",
+      'react-dom': 'ReactDOM'
     }
   }
 }

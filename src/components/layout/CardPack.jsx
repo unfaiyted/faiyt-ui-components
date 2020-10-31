@@ -5,29 +5,16 @@ import Box from "./Box";
 
 import "../../styles/card.scss"
 
-const Card = ({ header, footer, theme, children,...props}) => {
+const CardPack = ({ direction, theme, children,...props}) => {
   const {themePrefix, styles} = useTheme(theme);
 
   return (
     <div
-      className={[`${themePrefix}-card`].join(' ')}
+      className={[`${themePrefix}-card-pack`].join(' ')}
       style={styles}
       {...props}>
-      {header &&
-      <div  className={[`${themePrefix}-card-header`].join(' ')}>
-        {header}
-      </div>
-      }
 
-      <div className={[`${themePrefix}-card-content`].join(' ')}>
-        {children}
-      </div>
-
-      {footer &&
-      <div className={[`${themePrefix}-card-footer`].join(' ')}>
-        {footer}
-      </div>
-      }
+      {children}
 
     </div>
   )
@@ -35,7 +22,7 @@ const Card = ({ header, footer, theme, children,...props}) => {
 }
 
 
-Card.propTypes =  {
+CardPack.propTypes =  {
   /**
    * Content to be rendered inside of the Box
    */
@@ -43,7 +30,7 @@ Card.propTypes =  {
   /**
    * Content to be displayed at the top of the card
    */
-  header: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  direction: PropTypes.oneOf(["horizontal","vertical"]),
   /**
    * Content to be displayed at the bottom of the card
    */
@@ -57,8 +44,8 @@ Card.propTypes =  {
   })
 }
 
-Card.defaultProps = {
+CardPack.defaultProps = {
 
 }
 
-export default Card;
+export default CardPack;

@@ -24,14 +24,20 @@
     position: relative;
     cursor: pointer;
     margin: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+    white-space: nowrap;
 
     .#{$prefix}-nav-dropdown {
       display: none;
       flex-direction: column;
       position: absolute;
       background-color: #fff;
-      z-index: 2;
+      z-index: 10000;
       cursor: pointer;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
 
       &.#{$prefix}-nav-dropdown--shown {
         ;

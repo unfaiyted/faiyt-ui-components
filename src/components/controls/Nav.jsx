@@ -12,9 +12,9 @@ export const Nav = ({ direction, theme, items, ...props}) => {
 
   return (
     <ul
-       className={[`${themePrefix}-nav`, `${themePrefix}-nav--${direction}`, classNames].join(' ')}
        style={styles}
        {...props}
+       className={[`${themePrefix}-nav`, `${themePrefix}-nav--${direction}`, props?.className, classNames].join(' ')}
     >
       {items.map((item) => {
         return (<NavItem item={item}/>)
@@ -34,6 +34,12 @@ const NavItem = ({item}) => {
 
   const {themePrefix, classNames} = useTheme(item?.theme);
 
+  console.log("item.label", item.label, typeof item.label )
+
+
+  const labelIsString = (typeof item.label === "string");
+
+
   if(item?.items) {
     return (
       <li
@@ -41,14 +47,27 @@ const NavItem = ({item}) => {
         onMouseLeave={() => setIsShown(false)}
         className={`${themePrefix}-nav-item ${classNames}`}
       >
-        <a href={item?.href}> {item.label} </a>
+        {labelIsString &&
+          <a href={item?.href}> {item.label} </a>
+        }
+
+        {
+          !labelIsString && item.label
+        }
         <NavDropDown items={item.items} theme={item?.theme} isShown={isShown} />
       </li>)
   }
 
-  return (<li
-    className={`${themePrefix}-nav-item ${classNames}`}
-  ><a href={item?.href}> {item.label} </a></li>)
+  return (<li  className={`${themePrefix}-nav-item ${classNames}`} >
+
+    {labelIsString &&
+     <a href={item?.href}> {item.label} </a>
+    }
+
+    {
+      !labelIsString && item.label
+    }
+  </li>)
 };
 
 /**
@@ -60,21 +79,18 @@ const NavItem = ({item}) => {
  * @constructor
  */
 const NavDropDown = ({items, isShown, theme}) => {
-
   const {themePrefix, classNames} = useTheme(theme);
-
   const displayed = (isShown) ? "shown" : "hidden"
 
-
   return (
-   <div
+   <ul
      className={[`${themePrefix}-nav-dropdown`, `${themePrefix}-nav-dropdown--${displayed}`, classNames].join(' ')}
    >
      {items.map((item) => {
        return (<NavItem item={item} />)
      })}
 
-   </div>
+   </ul>
  )
 }
 
@@ -92,7 +108,7 @@ Nav.propTypes =  {
    * Array of Object items that will be displayed
    */
   items: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     theme:  PropTypes.object,
     href: PropTypes.string,
   })),
