@@ -1,12 +1,15 @@
 import {useTheme} from "../utilities/hooks/ThemeHook";
 import React from "react";
 import PropTypes from "prop-types";
-import Box from "./Box";
 
 import "../../styles/card.scss"
 
 const Card = ({ header, footer, theme, children,...props}) => {
   const {themePrefix, styles} = useTheme(theme);
+
+  console.log("header",typeof header);
+
+  const headerType = (typeof header === "object") ? "object" : "other";
 
   return (
     <div
@@ -14,7 +17,7 @@ const Card = ({ header, footer, theme, children,...props}) => {
       style={styles}
       {...props}>
       {header &&
-      <div  className={[`${themePrefix}-card-header`].join(' ')}>
+      <div  className={[`${themePrefix}-card-header`,`${themePrefix}-card-header--${headerType}`].join(' ')}>
         {header}
       </div>
       }

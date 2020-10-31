@@ -1,16 +1,18 @@
 import {useTheme} from "../utilities/hooks/ThemeHook";
 import React from "react";
 import PropTypes from "prop-types";
-import Box from "./Box";
 
 import "../../styles/card.scss"
 
+/**
+ * Used as a container to handle displaying a series of Card elements.
+ */
 const CardPack = ({ direction, theme, children,...props}) => {
-  const {themePrefix, styles} = useTheme(theme);
+  const {themePrefix, styles, classNames} = useTheme(theme);
 
   return (
     <div
-      className={[`${themePrefix}-card-pack`].join(' ')}
+      className={[`${themePrefix}-card-pack`, `${themePrefix}-card-pack--${direction}`, classNames].join(' ')}
       style={styles}
       {...props}>
 
@@ -45,7 +47,8 @@ CardPack.propTypes =  {
 }
 
 CardPack.defaultProps = {
-
+  direction: "horizontal",
+  theme: {},
 }
 
 export default CardPack;
